@@ -1,6 +1,6 @@
 ﻿using Final.Core.Requests.Transactions;
 using Final.Core.Responses;
-using System.Transactions;
+using Final.Core.Models;
 
 namespace Final.Core.Services;
 

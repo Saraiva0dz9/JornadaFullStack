@@ -7,7 +7,7 @@ public class Response<TData>
     private int _code = 200;
 
     [JsonConstructor]
-    public Response() => this._code = Configurations.DefaultStatusCode;
+    public Response(Models.Category category) => this._code = Configurations.DefaultStatusCode;
 
     public Response(TData? data, int code = Configurations.DefaultStatusCode, string? message = null)
     {
