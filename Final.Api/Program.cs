@@ -1,5 +1,6 @@
 using Final.Api.Data;
-using Final.Api.Data.Services;
+using Final.Api.Services;
+using Final.Core.Requests.Categories;
 using Final.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +15,5 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<ITransactionService, TransactionService>();
 
 var app = builder.Build();
-
-app.MapGet("/", () => "Hello World!");
 
 app.Run();

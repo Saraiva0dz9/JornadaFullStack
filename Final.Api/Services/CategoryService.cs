@@ -1,10 +1,11 @@
-﻿using Final.Core.Models;
+﻿using Final.Api.Data;
+using Final.Core.Models;
 using Final.Core.Requests.Categories;
 using Final.Core.Responses;
 using Final.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace Final.Api.Data.Services;
+namespace Final.Api.Services;
 
 public class CategoryService(AppDbContext context, ILogger<CategoryService> logger) : ICategoryService
 {

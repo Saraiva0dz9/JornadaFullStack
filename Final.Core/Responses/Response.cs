@@ -16,7 +16,7 @@ public class Response<TData>
         this.Message = message;
     }
 
-    private TData? Data { get; set; }
+    public TData? Data { get; set; }
     private string? Message { get; set; } 
     [JsonIgnore]
     public bool IsSuccess => _code is > 200 and < 299;

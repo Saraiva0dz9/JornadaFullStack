@@ -4,8 +4,10 @@ using Final.Core.Responses;
 using Final.Core.Services;
 using Final.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using Final.Core.Common;
+using Final.Api.Data;
 
-namespace Final.Api.Data.Services
+namespace Final.Api.Services
 {
     public class TransactionService(AppDbContext context, ILogger<Transaction> logger) : ITransactionService
     {
@@ -63,12 +65,58 @@ namespace Final.Api.Data.Services
 
         public async Task<Response<Transaction?>> GetByIdAsync(GetTransactionByIdRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var transaction = await context
+                    .Transactions
+                    .FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);
+
+                return transaction is null
+                    ? new Response<Transaction?>(null, 404, "Transação não encontrada")
+                    : new Response<Transaction?>(transaction);
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "TransactionService.GetByIdAsync");
+                throw;
+            }
         }
 
-        public async Task<PagedResponse<Transaction?>> GetByPeriodAsync(GetTransactionByPeriodRequest request)
+        public async Task<PagedResponse<List<Transaction>?>> GetByPeriodAsync(GetTransactionByPeriodRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                request.StartDate ??= DateTime.Now.GetFirstDay();
+                request.EndDate ??= DateTime.Now.GetLastDay();
+            }
+            catch
+            {
+                return new PagedResponse<List<Transaction>?>(null, 500, "Não foi possível determinar a data de início ou término");
+            }
+
+            try
+            {
+                var query = context
+                    .Transactions
+                    .AsNoTracking()
+                    .Where(x => x.UserId == request.UserId && x.PaidOrReceivedAt >= request.StartDate && x.PaidOrReceivedAt <= request.EndDate)
+                    .OrderBy(x => x.PaidOrReceivedAt);
+
+                var transactions = await query
+                    .Skip((request.PageNumber - 1) * request.PageSize)
+                    .Take(request.PageSize)
+                    .ToListAsync();
+
+                var count = await query.CountAsync();
+
+                return new PagedResponse<List<Transaction>?>(transactions, count, request.PageNumber, request.PageSize);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "TransactionService.GetByPeriodAsync");
+                throw;
+            }
         }
 
         public async Task<Response<Transaction?>> UpdateAsync(UpdateTransactionRequest request)
