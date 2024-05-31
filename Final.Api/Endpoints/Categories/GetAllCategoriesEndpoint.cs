@@ -8,7 +8,7 @@ using Final.Core.Requests.Categories;
 
 namespace Final.Api.Endpoints.Categories;
 
-public class GetAllCategoryEndpoint : IEndpoint
+public class GetAllCategoriesEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
         => app.MapGet("/", ServiceAsync)
