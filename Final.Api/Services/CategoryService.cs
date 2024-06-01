@@ -1,4 +1,5 @@
-﻿using Final.Api.Data;
+﻿using Fina.Core.Response;
+using Final.Api.Data;
 using Final.Core.Models;
 using Final.Core.Requests.Categories;
 using Final.Core.Responses;
@@ -91,8 +92,8 @@ public class CategoryService(AppDbContext context, ILogger<CategoryService> logg
                 .FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);
 
             return category is null
-                ? new Response<Category?>(null, 404, "Categoria não encontrada")
-                : new Response<Category?>(category);
+            ? new Response<Category?>(null, 404, "Categoria não encontrada")
+            : new Response<Category?>(category);
         }
         catch (Exception ex)
         {

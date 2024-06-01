@@ -1,4 +1,4 @@
-﻿
+﻿using Fina.Core.Response;
 using System.Text.Json.Serialization;
 
 namespace Final.Core.Responses;
@@ -8,6 +8,7 @@ public class PagedResponse<TData> : Response<TData>
     [JsonConstructor]
     public PagedResponse(TData? data, int totalCount, int currentPage = 1, int pageSize = Configurations.DefaultPageSize): base(data)
     {
+        this.Data = data;
         this.TotalCount = totalCount;
         this.CurrentPage = currentPage;
         this.PageSize = pageSize;

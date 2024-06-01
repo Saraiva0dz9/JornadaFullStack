@@ -1,4 +1,5 @@
-﻿using Final.Api.Common.API;
+﻿using Fina.Core.Response;
+using Final.Api.Common.API;
 using Final.Core.Models;
 using Final.Core.Requests.Transactions;
 using Final.Core.Responses;

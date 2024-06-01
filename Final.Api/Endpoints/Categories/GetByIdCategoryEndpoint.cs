@@ -2,7 +2,7 @@
 using Final.Core.Services;
 using Final.Core.Requests.Categories;
 using Final.Core.Models;
-using Final.Core.Responses;
+using Fina.Core.Response;
 
 namespace Final.Api.Endpoints.Categories;
 

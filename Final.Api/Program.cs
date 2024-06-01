@@ -1,19 +1,19 @@
-using Final.Api.Data;
-using Final.Api.Services;
-using Final.Core.Requests.Categories;
-using Final.Core.Services;
-using Microsoft.EntityFrameworkCore;
+using Final.Api;
+using Final.Api.Common.API;
+using Final.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Conection to database
-builder.Services.AddDbContext<AppDbContext>
-    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-
-// SERVICES
-builder.Services.AddTransient<ICategoryService, CategoryService>();
-builder.Services.AddTransient<ITransactionService, TransactionService>();
+builder.AddConfiguration();
+builder.AddDataContext();
+builder.AddCors();
+builder.AddDocumentation();
+builder.AddServices();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+    app.ConfigureDevEnvironment();
+
+app.UseCors(ApiConfiguration.CorsPolicyName);
+app.MapEndpoints();
 
 app.Run();

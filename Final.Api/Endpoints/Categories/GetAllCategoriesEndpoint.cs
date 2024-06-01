@@ -1,10 +1,10 @@
 ﻿using Final.Api.Common.API;
 using Final.Core.Models;
-using Final.Core.Responses;
 using Final.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Final.Core;
 using Final.Core.Requests.Categories;
+using Fina.Core.Response;
 
 namespace Final.Api.Endpoints.Categories;
 

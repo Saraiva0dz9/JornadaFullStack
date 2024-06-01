@@ -6,6 +6,7 @@ using Final.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Final.Core.Common;
 using Final.Api.Data;
+using Fina.Core.Response;
 
 namespace Final.Api.Services
 {

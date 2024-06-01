@@ -1,8 +1,8 @@
-﻿using Final.Api.Common.API;
+﻿using Fina.Core.Response;
+using Final.Api.Common.API;
 using Final.Core.Models;
 using Final.Core.Requests.Categories;
 using Final.Core.Services;
-using Final.Core.Responses;
 
 namespace Final.Api.Endpoints.Categories;
 

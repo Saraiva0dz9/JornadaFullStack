@@ -1,7 +1,7 @@
-﻿using Final.Api.Common.API;
+﻿using Fina.Core.Response;
+using Final.Api.Common.API;
 using Final.Core.Models;
 using Final.Core.Requests.Transactions;
-using Final.Core.Responses;
 using Final.Core.Services;
 
 namespace Final.Api.Endpoints.Transactions;

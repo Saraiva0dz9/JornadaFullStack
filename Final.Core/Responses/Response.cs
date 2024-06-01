@@ -1,23 +1,26 @@
-﻿using System.Text.Json.Serialization;
+﻿using Final.Core;
+using System.Text.Json.Serialization;
 
-namespace Final.Core.Responses;
+namespace Fina.Core.Response;
 
 public class Response<TData>
 {
-    private int _code = 200;
+    private int _code = Configurations.DefaultStatusCode;
 
     [JsonConstructor]
-    public Response(Models.Category category) => this._code = Configurations.DefaultStatusCode;
+    public Response()
+        => _code = Configurations.DefaultStatusCode;
 
     public Response(TData? data, int code = Configurations.DefaultStatusCode, string? message = null)
     {
-        this.Data = data;
-        this._code = code;
-        this.Message = message;
+        Data = data;
+        _code = code;
+        Message = message;
     }
 
     public TData? Data { get; set; }
-    private string? Message { get; set; } 
+    public string? Message { get; set; }
+
     [JsonIgnore]
-    public bool IsSuccess => _code is > 200 and < 299;
+    public bool IsSuccess => _code is >= 200 and <= 299;
 }
