@@ -1,6 +1,4 @@
-﻿
-
-using static System.Net.WebRequestMethods;
+﻿using static System.Net.WebRequestMethods;
 
 namespace Final.Core;
 public static class Configurations
